@@ -1,37 +1,54 @@
-// export const addEmployee = (employee) => {
-//   return {
-//     type: "ADD_EMPLOYEE",
-//     payload: employee,
-//   };
-// };
+import api from "../../api/api";
 
-import axios from "axios";
-
-// export const removeEmployee = (employee) => {
-//   return {
-//     type: "REMOVE_EMPLOYEE",
-//     payload: employee,
-//   };
-// };
-
-export const getEmployeeSuccess = (emp) => {
+export const getAll = (employee) => {
   return {
-    type: "GET_ALL_EMPLOYEE_SUCCESS",
-    payload: emp,
+    type: "GET_ALL_EMPLOYEE",
+    payload: employee,
+  };
+};
+
+export const add = (newEmployee) => {
+  return {
+    type: "ADD_EMPLOYEE",
+    payload: newEmployee,
   };
 };
 
 export const getEmployee = () => {
-  return (dispatch) => {
-    axios
-      .get("http://localhost:6789/api/v1/employees")
-      .then((response) => {
-        const users = response.data;
-        dispatch(getEmployeeSuccess(users));
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      });
+  // axios with promise
+  // return (dispatch) => {
+  //   api
+  //     .get(`employees`)
+  //     .then((response) => {
+  //       const empl = response.data;
+  //       dispatch(getAll(empl));
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  // axios with async await
+  const fetchEmployee = async (dispatch) => {
+    try {
+      let response = await api.get(`employees`);
+      dispatch(getAll(response.data));
+    } catch (error) {
+      console.log(error);
+    }
   };
+  return fetchEmployee;
+};
+
+export const addEmployee = (data) => {
+  const fetchAddEmployee = async (dispatch) => {
+    try {
+      let response = await api.post(`employees`, data);
+      console.log(response.data);
+      dispatch(add(response.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return fetchAddEmployee;
 };

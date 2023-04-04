@@ -1,46 +1,21 @@
-import { useDispatch, useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import AddEmployee from "./components/addEmployee/AddEmployee";
 import Employee from "./components/employee/Employee";
-import { useEffect } from "react";
-import { getEmployee } from "./app/actions/employee";
+import LinkNotFound from "./components/error/LinkNotFound";
+import Header from "./components/header/Header";
 
 function App() {
-  const employee = useSelector((state) => state.employee.list);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const action = getEmployee();
-    console.log(action);
-    dispatch(action);
-  }, []);
-
   return (
-    <div className="container">
-      {/* <Employee /> */}
-      <div>
-        <h2 className="text-center">Employee List</h2>
-        <div>
-          <table className="table table-striped table-bordered">
-            <thead className="thead-dark">
-              <tr>
-                <th>Employee First Name</th>
-                <th>Employee Last Name</th>
-                <th>Employee Email ID</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {employee.map((empl) => (
-                <tr key={empl.id}>
-                  <td>{empl.firstName}</td>
-                  <td>{empl.lastName}</td>
-                  <td>{empl.emailId}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+    <div>
+      <Header />
+
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Employee />} />
+          <Route path="*" element={<LinkNotFound />} />
+          <Route path="/create" element={<AddEmployee />} />
+        </Routes>
       </div>
     </div>
   );
