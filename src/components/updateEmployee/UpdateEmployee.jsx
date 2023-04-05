@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useLoaderData, useParams } from "react-router-dom";
 
-function UpdateEmployee() {
+function UpdateEmployee(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
 
   const dispatch = useDispatch();
 
+  const { id } = useParams();
+
   useEffect(() => {});
 
   const handleUpdateEmployeeClick = (e) => {
     e.preventDefault();
   };
+
+  console.log(id);
   return (
     <div className="card col-md-6 offset-md-3 offsett-md-3">
       <h2 className="text-center">Update Employee</h2>

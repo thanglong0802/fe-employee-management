@@ -70,11 +70,11 @@ export const addEmployee = (data) => {
 export const removeEmployee = (id) => {
   const fetchRemove = async (dispatch) => {
     try {
-      let response = await api.delete(`employees/${id}`);
-      dispatch(remove(response.data));
+      await api.delete(`employees/${id}`);
+      dispatch(remove(id));
 
-      const res = getEmployee();
-      dispatch(res);
+      // const res = getEmployee();
+      // dispatch(res);
     } catch (error) {
       console.log(error);
     }
