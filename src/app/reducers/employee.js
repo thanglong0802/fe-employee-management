@@ -18,6 +18,26 @@ const employeeReducer = (state = initialState, action) => {
         employees: newList,
       };
     }
+    case "REMOVE_EMPLOYEE": {
+      const newList = [...state.employees];
+      const deleteEmployee = newList.filter(
+        (employee) => !(employee.id === action.payload)
+      );
+      return {
+        ...state,
+        employees: deleteEmployee,
+      };
+    }
+    case "GET_EMPLOYEE_BY_ID": {
+      const newList = [...state.employees];
+      const filterEmployee = newList.filter(
+        (empl) => empl.id === action.payload
+      );
+      return {
+        ...state,
+        employees: filterEmployee,
+      };
+    }
     default:
       return state;
   }

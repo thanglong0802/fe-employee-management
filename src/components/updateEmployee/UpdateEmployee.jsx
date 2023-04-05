@@ -1,29 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addEmployee } from "../../app/actions/employee";
 
-function AddEmployee() {
+function UpdateEmployee() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
 
   const dispatch = useDispatch();
 
-  const handleAddEmployeeClick = (e) => {
+  useEffect(() => {});
+
+  const handleUpdateEmployeeClick = (e) => {
     e.preventDefault();
-    const info = {
-      firstName,
-      lastName,
-      emailId,
-    };
-    dispatch(addEmployee(info));
-    setFirstName("");
-    setLastName("");
-    setEmailId("");
   };
   return (
     <div className="card col-md-6 offset-md-3 offsett-md-3">
-      <h2 className="text-center">Add Employee</h2>
+      <h2 className="text-center">Update Employee</h2>
       <div>
         <form method="post">
           <div className="form-group row">
@@ -73,7 +65,7 @@ function AddEmployee() {
               <button
                 type="submit"
                 className="btn btn-primary"
-                onClick={handleAddEmployeeClick}
+                onClick={handleUpdateEmployeeClick}
               >
                 Save
               </button>
@@ -85,4 +77,4 @@ function AddEmployee() {
   );
 }
 
-export default AddEmployee;
+export default UpdateEmployee;

@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getEmployee } from "../../app/actions/employee";
+import {
+  getEmployee,
+  getEmployeeById,
+  removeEmployee,
+} from "../../app/actions/employee";
+import { Link } from "react-router-dom";
+
+import "./css/style.css";
 
 function ListEmployee() {
   const employee = useSelector((state) => state.employee.employees);
@@ -9,7 +16,20 @@ function ListEmployee() {
 
   useEffect(() => {
     dispatch(getEmployee());
-  }, [dispatch]);
+  }, []);
+
+  const handleDeleteClick = (id) => {
+    const rs = window.confirm(`Xác nhận xóa`);
+    if (rs === true) {
+      dispatch(removeEmployee(id));
+    } else {
+      return;
+    }
+  };
+
+  const handleUpdateClick = (id) => {
+    dispatch(getEmployeeById(id));
+  };
 
   return (
     <div>
@@ -30,6 +50,22 @@ function ListEmployee() {
                 <td>{empl.firstName}</td>
                 <td>{empl.lastName}</td>
                 <td>{empl.emailId}</td>
+                <td className="td-button">
+                  <button
+                    className="btn btn-info"
+                    onClick={() => handleUpdateClick(empl.id)}
+                  >
+                    <Link to={`/employees/${empl.id}`} className="link-update">
+                      Update
+                    </Link>
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDeleteClick(empl.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

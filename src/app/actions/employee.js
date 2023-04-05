@@ -14,6 +14,20 @@ export const add = (newEmployee) => {
   };
 };
 
+export const remove = (id) => {
+  return {
+    type: "REMOVE_EMPLOYEE",
+    payload: id,
+  };
+};
+
+export const getById = (id) => {
+  return {
+    type: "GET_EMPLOYEE_BY_ID",
+    payload: id,
+  };
+};
+
 export const getEmployee = () => {
   // axios with promise
   // return (dispatch) => {
@@ -51,4 +65,32 @@ export const addEmployee = (data) => {
     }
   };
   return fetchAddEmployee;
+};
+
+export const removeEmployee = (id) => {
+  const fetchRemove = async (dispatch) => {
+    try {
+      let response = await api.delete(`employees/${id}`);
+      dispatch(remove(response.data));
+
+      const res = getEmployee();
+      dispatch(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return fetchRemove;
+};
+
+export const getEmployeeById = (id) => {
+  const fetchGetById = async (dispatch) => {
+    try {
+      let response = await api.get(`employees/${id}`);
+      console.log(response.data);
+      dispatch(getById(response.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return fetchGetById;
 };

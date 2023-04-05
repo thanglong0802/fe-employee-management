@@ -1,0 +1,13 @@
+.td-button {
+  display: flex;
+  justify-content: space-around;
+}
+
+.link-update {
+  color: #fff;
+}
+
+.link-update:hover {
+  text-decoration: none;
+  color: #fff;
+}
