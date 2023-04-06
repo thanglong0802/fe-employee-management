@@ -1,23 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getEmployeeById, updateEmployee } from "../../app/actions/employee";
 
-function UpdateEmployee(props) {
+function UpdateEmployee() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
+
+  const employeeUpdate = useSelector((state) => state.employee.updateEmployee);
 
   const dispatch = useDispatch();
 
   const { id } = useParams();
 
-  useEffect(() => {});
+  useEffect(() => {
+    dispatch(getEmployeeById(id));
+  }, []);
+
+  useEffect(() => {
+    setFirstName(employeeUpdate.firstName);
+    setLastName(employeeUpdate.lastName);
+    setEmailId(employeeUpdate.emailId);
+  });
 
   const handleUpdateEmployeeClick = (e) => {
     e.preventDefault();
+    const info = {
+      firstName,
+      lastName,
+      emailId,
+    };
+    debugger;
+    dispatch(updateEmployee(id, info));
   };
 
-  console.log(id);
   return (
     <div className="card col-md-6 offset-md-3 offsett-md-3">
       <h2 className="text-center">Update Employee</h2>

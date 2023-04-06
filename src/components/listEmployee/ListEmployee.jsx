@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getEmployee,
-  getEmployeeById,
-  removeEmployee,
-} from "../../app/actions/employee";
 import { Link } from "react-router-dom";
+import { getEmployee, removeEmployee } from "../../app/actions/employee";
 
 import "./css/style.css";
 
@@ -25,10 +21,6 @@ function ListEmployee() {
     } else {
       return;
     }
-  };
-
-  const handleUpdateClick = (id) => {
-    dispatch(getEmployeeById(id));
   };
 
   return (
@@ -51,10 +43,7 @@ function ListEmployee() {
                 <td>{empl.lastName}</td>
                 <td>{empl.emailId}</td>
                 <td className="td-button">
-                  <button
-                    className="btn btn-info"
-                    onClick={() => handleUpdateClick(empl.id)}
-                  >
+                  <button className="btn btn-info">
                     <Link to={`/employees/${empl.id}`} className="link-update">
                       Update
                     </Link>

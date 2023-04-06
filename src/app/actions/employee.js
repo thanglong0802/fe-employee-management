@@ -21,10 +21,17 @@ export const remove = (id) => {
   };
 };
 
-export const getById = (id) => {
+export const getById = (objectId) => {
   return {
     type: "GET_EMPLOYEE_BY_ID",
-    payload: id,
+    payload: objectId,
+  };
+};
+
+export const update = (employee) => {
+  return {
+    type: "UPDATE_EMPLOYEE",
+    payload: employee,
   };
 };
 
@@ -72,9 +79,6 @@ export const removeEmployee = (id) => {
     try {
       await api.delete(`employees/${id}`);
       dispatch(remove(id));
-
-      // const res = getEmployee();
-      // dispatch(res);
     } catch (error) {
       console.log(error);
     }
@@ -93,4 +97,17 @@ export const getEmployeeById = (id) => {
     }
   };
   return fetchGetById;
+};
+
+export const updateEmployee = (id, employee) => {
+  const fetchUpdate = async (dispatch) => {
+    try {
+      await api.put(`/employees/${id}`, employee);
+      console.log(employee);
+      dispatch(update(employee));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return fetchUpdate;
 };

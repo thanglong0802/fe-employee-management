@@ -1,5 +1,6 @@
 const initialState = {
   employees: [],
+  updateEmployee: {},
 };
 
 const employeeReducer = (state = initialState, action) => {
@@ -29,13 +30,15 @@ const employeeReducer = (state = initialState, action) => {
       };
     }
     case "GET_EMPLOYEE_BY_ID": {
-      const newList = [...state.employees];
-      const filterEmployee = newList.filter(
-        (empl) => empl.id === action.payload
-      );
       return {
         ...state,
-        employees: filterEmployee,
+        updateEmployee: action.payload,
+      };
+    }
+    case "UPDATE_EMPLOYEE": {
+      return {
+        ...state,
+        employees: [...state.employees, action.payload],
       };
     }
     default:
