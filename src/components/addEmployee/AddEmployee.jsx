@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { addEmployee } from "../../app/actions/employee";
 
 function AddEmployee() {
@@ -76,6 +77,20 @@ function AddEmployee() {
                 onClick={handleAddEmployeeClick}
               >
                 Save
+              </button>
+              <button
+                type=""
+                className="btn btn-danger"
+                style={{
+                  marginLeft: "7px",
+                }}
+              >
+                <Link
+                  to={"/"}
+                  style={{ color: "#fff", textDecoration: "none" }}
+                >
+                  Cancel
+                </Link>
               </button>
             </div>
           </div>

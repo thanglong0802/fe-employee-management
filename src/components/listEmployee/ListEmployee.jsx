@@ -54,6 +54,14 @@ function ListEmployee() {
                   >
                     Delete
                   </button>
+                  <button className="btn btn-success">
+                    <Link
+                      to={`/view-employees/${empl.id}`}
+                      className="link-update"
+                    >
+                      Detail
+                    </Link>
+                  </button>
                 </td>
               </tr>
             ))}

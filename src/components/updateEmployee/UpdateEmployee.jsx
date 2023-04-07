@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getEmployeeById, updateEmployee } from "../../app/actions/employee";
 
 function UpdateEmployee() {
@@ -22,7 +22,7 @@ function UpdateEmployee() {
     setFirstName(employeeUpdate.firstName);
     setLastName(employeeUpdate.lastName);
     setEmailId(employeeUpdate.emailId);
-  });
+  }, [employeeUpdate]);
 
   const handleUpdateEmployeeClick = (e) => {
     e.preventDefault();
@@ -33,6 +33,9 @@ function UpdateEmployee() {
     };
     debugger;
     dispatch(updateEmployee(id, info));
+    setFirstName("");
+    setLastName("");
+    setEmailId("");
   };
 
   return (
@@ -47,7 +50,7 @@ function UpdateEmployee() {
             <div className="col-sm-10">
               <input
                 type="text"
-                className="form-control"
+                className="form-control first-name"
                 id="inputEmail3"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -61,7 +64,7 @@ function UpdateEmployee() {
             <div className="col-sm-10">
               <input
                 type="text"
-                className="form-control"
+                className="form-control last-name"
                 id="inputPassword3"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -75,7 +78,7 @@ function UpdateEmployee() {
             <div className="col-sm-10">
               <input
                 type="text"
-                className="form-control"
+                className="form-control email"
                 id="inputPassword3"
                 value={emailId}
                 onChange={(e) => setEmailId(e.target.value)}
@@ -90,6 +93,23 @@ function UpdateEmployee() {
                 onClick={handleUpdateEmployeeClick}
               >
                 Save
+              </button>
+              <button
+                type=""
+                className="btn btn-danger"
+                style={{
+                  marginLeft: "7px",
+                }}
+              >
+                <Link
+                  to={"/"}
+                  style={{
+                    color: "#fff",
+                    textDecoration: "none",
+                  }}
+                >
+                  Cancel
+                </Link>
               </button>
             </div>
           </div>
