@@ -86,7 +86,7 @@ function AddEmployee() {
                 }}
               >
                 <Link
-                  to={"/"}
+                  to={"#"}
                   style={{ color: "#fff", textDecoration: "none" }}
                 >
                   Cancel

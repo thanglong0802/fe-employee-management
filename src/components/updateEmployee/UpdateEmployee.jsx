@@ -102,7 +102,7 @@ function UpdateEmployee() {
                 }}
               >
                 <Link
-                  to={"/"}
+                  to={"#"}
                   style={{
                     color: "#fff",
                     textDecoration: "none",
